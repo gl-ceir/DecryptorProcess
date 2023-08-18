@@ -14,11 +14,11 @@ public class PropertyReader {
     private static final Logger logger = LogManager.getLogger(PropertyReader.class);
 
     Properties loadProperties() {
-         String filePath = "/u01/ceirapp/configuration/configuration.properties"; 
+        String filePath = System.getenv("commonConfigurationFilePath");
         try (InputStream inputStream = new FileInputStream(filePath);) {
             prop.load(inputStream);
         } catch (IOException io) {
-           // logger.error(io.toString(), (Throwable) io);
+            logger.error(io.toString(), (Throwable) io);
         }
         return prop;
     }
@@ -34,7 +34,7 @@ public class PropertyReader {
                 return null;
             }
         } catch (Exception io) {
-         //   logger.error(io.toString(), (Throwable) io);
+            logger.error(io.toString(), (Throwable) io);
             return null;
         }
     }
