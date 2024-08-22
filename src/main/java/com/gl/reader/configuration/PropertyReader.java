@@ -5,20 +5,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 import java.util.Properties;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
 
 public class PropertyReader {
 
     Properties prop = new Properties();
-    private static final Logger logger = LogManager.getLogger(PropertyReader.class);
 
     Properties loadProperties() {
         String filePath = System.getenv("commonConfigurationFilePath");
         try (InputStream inputStream = new FileInputStream(filePath);) {
             prop.load(inputStream);
-        } catch (IOException io) {
-            logger.error(io.toString(), (Throwable) io);
+        } catch (Exception e) {
+             System.out.println(e);
         }
         return prop;
     }
@@ -33,8 +31,8 @@ public class PropertyReader {
             } else {
                 return null;
             }
-        } catch (Exception io) {
-            logger.error(io.toString(), (Throwable) io);
+        } catch (Exception e) {
+             System.out.println(e);
             return null;
         }
     }
