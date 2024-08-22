@@ -13,14 +13,12 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
 
-@EnableAsync
+
 @SpringBootConfiguration
 @EnableAutoConfiguration
 @SpringBootApplication(scanBasePackages = {"com.gl.reader"})
 
 public class PasswordDecryption {
-
-    private static final Logger logger = LogManager.getLogger(PropertyReader.class);
 
     public static void main(String[] args) {
         try {
@@ -28,7 +26,6 @@ public class PasswordDecryption {
             final String encrpy_text = propertyReader.getPropValue(args[0]).trim();
             System.out.println(passwordDecryp(encrpy_text));
         } catch (Exception e) {
-            //   logger.error(e.toString(), (Throwable) e);
             System.out.println("Error");
         }
     }
@@ -40,7 +37,6 @@ public class PasswordDecryption {
             encryptor.setPassword(secretKey);
             return encryptor.decrypt(password);
         } catch (Exception e) {
-            //    logger.error(e.toString(), (Throwable) e);
             return null;
         }
     }
